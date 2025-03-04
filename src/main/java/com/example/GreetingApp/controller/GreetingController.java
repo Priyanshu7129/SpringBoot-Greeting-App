@@ -25,8 +25,13 @@ public class GreetingController {
         return greetingService.getPersonalizedGreeting(firstName, lastName);
     }
 
-    @PostMapping("/save")
+    @PostMapping("/saveMessage")  // ✅ Renamed to avoid conflict
     public Greeting saveGreeting(@RequestParam String message) {
         return greetingService.saveGreeting(message);
+    }
+
+    @GetMapping("/get/{id}")  // ✅ Changed to "/get/{id}" instead of "/{id}"
+    public Greeting getGreetingById(@PathVariable Long id) {
+        return greetingService.getGreetingById(id);
     }
 }
