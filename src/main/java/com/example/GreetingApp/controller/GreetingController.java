@@ -4,6 +4,8 @@ import com.example.GreetingApp.model.Greeting;
 import com.example.GreetingApp.service.GreetingService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/hello")
 public class GreetingController {
@@ -25,13 +27,18 @@ public class GreetingController {
         return greetingService.getPersonalizedGreeting(firstName, lastName);
     }
 
-    @PostMapping("/saveMessage")  // ✅ Renamed to avoid conflict
+    @PostMapping("/saveMessage")
     public Greeting saveGreeting(@RequestParam String message) {
         return greetingService.saveGreeting(message);
     }
 
-    @GetMapping("/get/{id}")  // ✅ Changed to "/get/{id}" instead of "/{id}"
+    @GetMapping("/get/{id}")
     public Greeting getGreetingById(@PathVariable Long id) {
         return greetingService.getGreetingById(id);
+    }
+
+    @GetMapping("/list")
+    public List<Greeting> getAllGreetings() {
+        return greetingService.getAllGreetings();
     }
 }
