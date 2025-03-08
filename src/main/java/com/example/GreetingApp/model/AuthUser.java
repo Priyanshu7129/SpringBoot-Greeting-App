@@ -4,26 +4,26 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
+@Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
+@Builder
 public class AuthUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String firstName;
+    @Column(nullable = false, unique = true)
+    private String username;
 
     @Column(nullable = false)
-    private String lastName;
+    private String password;
 
-    @Column(unique = true, nullable = false)
-    private String email;
+    @Column(nullable = false) // ✅ Ensure role is always required
+    private String role;
 
-    @Column(nullable = false)
-    private String password; // Hashed using BCrypt
+    // Getters and Setters
 }

@@ -1,26 +1,34 @@
 package com.example.GreetingApp.dto;
 
-import jakarta.validation.constraints.*;
-import lombok.*;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class AuthUserDTO {
-
-    @Pattern(regexp = "^[A-Z][a-z]+$", message = "First name must start with an uppercase letter")
-    private String firstName;
-
-    @Pattern(regexp = "^[A-Z][a-z]+$", message = "Last name must start with an uppercase letter")
-    private String lastName;
-
-    @Email(message = "Invalid email format")
-    private String email;
-
-    @Pattern(
-            regexp = "^(?=.*[A-Z])(?=.*[!@#$%^&*()_+])(?=.*\\d)[A-Za-z\\d!@#$%^&*()_+]{8,}$",
-            message = "Password must be at least 8 characters, contain 1 uppercase, 1 special character, and 1 number"
-    )
+    private String username;
     private String password;
+    private String role; // ✅ Add role field
+
+    // Constructor
+    public AuthUserDTO(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    // Getters
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getRole() {  // ✅ Add getter for role
+        return role;
+    }
 }
+
